@@ -129,83 +129,118 @@ def game_hash
   }
 end
 
+#start new methods
+def players #combines all players into one array
+  game_hash[:home][:players].concat game_hash[:away][:players]
+end
+
+
+def find_player(player_name) #finds a specific player
+  players.find do |player|
+    player[:player_name] == player_name
+  end
+end
+
+def find_team(team_name)
+  game_hash.values.find do |team|
+    team_name == team[:team_name]
+  end
+end
+
 
 
 def num_points_scored(player_search)
-  game_hash.each do |team, team_info|
-    team_info[:players].each do |player|
-      if player[:player_name] == player_search
-        return player[:points]
-      end
-    end
-  end
+  find_player(player_search)[:points]
 end
-  
+
+
 def shoe_size(shoe_search)
-  game_hash.each do |team, team_info|
-    team_info[:players].each do |player|
-      if player[:player_name] == shoe_search
-        return player[:shoe]
-      end
-    end
-  end
+  find_player(shoe_search)[:shoe]
+end
+
+def team_colors(team_input)
+  find_team(team_input)[:colors]
+end
+
+                  
+#def num_points_scored(player_search)
+#  game_hash.each do |team, team_info|
+#    team_info[:players].each do |player|
+#      if player[:player_name] == player_search
+#        return player[:points]
+#      end
+#  end
+#end
   
-end
+#def shoe_size(shoe_search)
+#  game_hash.each do |team, team_info|
+#    team_info[:players].each do |player|
+#      if player[:player_name] == shoe_search
+#        return player[:shoe]
+#      end
+#    end
+#  end
+#  
+#end
 
-def team_colors (team_input)
-  if team_input == "Charlotte Hornets"
-    return game_hash[:away][:colors]
-  else
-    return game_hash[:home][:colors]
-  end
-end
+#def team_colors (team_input)
+#  if team_input == "Charlotte Hornets"
+#    return game_hash[:away][:colors]
+#  else
+#    return game_hash[:home][:colors]
+#  end
+#end
 
-def team_names
- game_hash.map do |team, team_info|
-   team_info[:team_name]
- end
-end
+#def team_names
+# game_hash.map do |team, team_info|
+#   team_info[:team_name]
+# end
+#end
 
-def player_numbers (input)
-  final_array = []
-  game_hash.each do |team, team_info|
-    if team_info[:team_name] == input
-      team_info.each do |key, value|
-        if key == :players
-          value.each do |player|
-            final_array.push(player[:number])
-          end
-        end
-      end
-    end
-  end
-  return final_array
-end
+#def player_numbers (input)
+#  final_array = []
+#  game_hash.each do |team, team_info|
+#    if team_info[:team_name] == input
+#      team_info.each do |key, value|
+#        if key == :players
+#          value.each do |player|
+#            final_array.push(player[:number])
+#          end
+#        end
+#      end
+#    end
+#  end
+#  return final_array
+#end
 
-def player_stats(input)
-  game_hash.each do |team, team_info|
-    team_info.each do |key, value|
-      if key == :players 
-        value.each do |player|
-          if player[:player_name] == input 
-            return player 
-          end
-        end
-      end
-    end
-  end
-end
+#def player_stats(input)
+#  game_hash.each do |team, team_info|
+#    team_info.each do |key, value|
+#      if key == :players 
+#        value.each do |player|
+#          if player[:player_name] == input 
+#            return player 
+#end
+#end
+#end
+#end
+#end
+#end
+
       
-def big_shoe_rebounds
-  big_shoe = 0 
-  rebounds = 0
-  game_hash.each do |team, team_info|
-    team_info[:players].each do |player|
-      if player[:shoe] > big_shoe
-        big_shoe = player[:shoe]
-        rebounds = player[:rebounds]
-      end
-    end
-  end
-  return rebounds
-end
+#def big_shoe_rebounds
+#  big_shoe = 0 
+#  rebounds = 0
+#  game_hash.each do |team, team_info|
+#    team_info[:players].each do |player|
+#      if player[:shoe] > big_shoe
+#        big_shoe = player[:shoe]
+#        rebounds = player[:rebounds]
+#      end
+#    end
+#  end
+#  return rebounds
+#end
+
+#binding.pry
+0
