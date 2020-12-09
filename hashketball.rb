@@ -166,36 +166,35 @@ def team_names
  end
 end
 
-def player_numbers (input)
-  final_array = []
-  game_hash.each do |team, team_info|
-    if team_info[:team_name] == input
-      team_info.each do |key, value|
-        if key == :players
-          value.each do |player|
-            final_array.push(player[:number])
-          end
-        end
-      end
-    end
-  end
-  return final_array
-end
+
+#def player_stats(input)
+#  game_hash.each do |team, team_info|
+#    team_info.each do |key, value|
+#      if key == :players 
+#        value.each do |player|
+#          if player[:player_name] == input 
+#            return player 
+#          end
+#        end
+#      end
+#    end
+#  end
+#end
 
 def player_stats(input)
-  game_hash.each do |team, team_info|
-    team_info.each do |key, value|
-      if key == :players 
-        value.each do |player|
-          if player[:player_name] == input 
-            return player 
-          end
-        end
+  game_hash.find do |team, team_info|
+    if team_info[:player_name] == input
+        return team_info[:players]
       end
     end
   end
+  
 end
-      
+
+def player_numbers(input)
+  
+end
+
 def big_shoe_rebounds
   big_shoe = 0 
   rebounds = 0
